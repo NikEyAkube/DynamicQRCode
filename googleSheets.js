@@ -1,6 +1,8 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 require('dotenv').config();
-const creds = require(process.env.GOOGLE_CREDENTIALS_PATH);
+
+// Декодирование учетных данных из переменной окружения
+const creds = JSON.parse(Buffer.from(process.env.GOOGLE_CREDENTIALS, 'base64').toString('utf-8'));
 
 async function appendToSheet(data) {
   try {
@@ -31,6 +33,7 @@ async function appendToSheet(data) {
     console.log('Row appended successfully');
   } catch (error) {
     console.error('Error appending row:', error); // Логирование ошибок
+    throw error;
   }
 }
 
