@@ -2,6 +2,7 @@ const express = require('express');
 const generateQRCode = require('./qr');
 const appendToSheet = require('./googleSheets');
 const useragent = require('express-useragent'); // Для определения типа устройства и ОС
+const moment = require('moment-timezone');
 const path = require('path');
 
 const app = express();
@@ -35,7 +36,7 @@ app.get('/track', async (req, res) => {
     return res.status(400).send('URL is required');
   }
 
-  const timestamp = new Date().toLocaleString(); // Изменяем формат даты
+  const timestamp = moment().tz('Europe/Moscow').format('YYYY-MM-DD HH:mm:ss'); // Московское время
   const device = req.useragent.isMobile ? 'Mobile' : req.useragent.isTablet ? 'Tablet' : 'Desktop';
   const os = req.useragent.os;
   const browser = req.useragent.browser;
