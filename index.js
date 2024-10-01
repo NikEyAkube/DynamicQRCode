@@ -7,25 +7,28 @@ const app = express();
 const port = process.env.PORT || 3001;
 const baseUrl = process.env.BASE_URL || `https://${process.env.VERCEL_URL}`; // Используем переменную окружения для базового URL
 
-app.use(express.static('public'));
+app.use(express.static('public')); // Обслуживание статических файлов из папки public
 app.use(useragent.express()); // Используем middleware для user-agent
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the Dynamic QR Code Generator!');
+  res.sendFile(__dirname + '/public/index.html'); // Отправка index.html при переходе на корневой URL
 });
 
 app.get('/generate', async (req, res) => {
+  console.log('Received request for /generate');
   const { url, color, size } = req.query;
   if (!url) {
     return res.status(400).send('URL is required');
   }
 
   const trackUrl = `${baseUrl}/track?url=${encodeURIComponent(url)}`;
+  console.log('Track URL:', trackUrl);
   const qrCode = await generateQRCode(trackUrl, color, size);
   res.send(`<img src="${qrCode}" alt="QR Code" />`);
 });
 
 app.get('/track', async (req, res) => {
+  console.log('Received request for /track');
   const { url } = req.query;
   if (!url) {
     return res.status(400).send('URL is required');
