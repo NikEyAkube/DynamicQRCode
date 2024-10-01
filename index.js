@@ -5,10 +5,14 @@ const useragent = require('express-useragent'); // Для определения
 
 const app = express();
 const port = process.env.PORT || 3001;
-const baseUrl = process.env.BASE_URL || `http://localhost:${port}`; // Используем переменную окружения для базового URL
+const baseUrl = process.env.BASE_URL || `https://${process.env.VERCEL_URL}`; // Используем переменную окружения для базового URL
 
 app.use(express.static('public'));
 app.use(useragent.express()); // Используем middleware для user-agent
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the Dynamic QR Code Generator!');
+});
 
 app.get('/generate', async (req, res) => {
   const { url, color, size } = req.query;
@@ -42,3 +46,5 @@ app.get('/track', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+module.exports = app;
