@@ -2,16 +2,17 @@ const express = require('express');
 const generateQRCode = require('./qr');
 const appendToSheet = require('./googleSheets');
 const useragent = require('express-useragent'); // Для определения типа устройства и ОС
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3001;
 const baseUrl = process.env.BASE_URL || `https://${process.env.VERCEL_URL}`; // Используем переменную окружения для базового URL
 
-app.use(express.static('public')); // Обслуживание статических файлов из папки public
+app.use(express.static(path.join(__dirname, 'public'))); // Обслуживание статических файлов из папки public
 app.use(useragent.express()); // Используем middleware для user-agent
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html'); // Отправка index.html при переходе на корневой URL
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Отправка index.html при переходе на корневой URL
 });
 
 app.get('/generate', async (req, res) => {
