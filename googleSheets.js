@@ -1,4 +1,5 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+const moment = require('moment-timezone');
 require('dotenv').config();
 
 // Декодирование учетных данных из переменной окружения
@@ -11,7 +12,6 @@ async function appendToSheet(data) {
     await doc.loadInfo();
     const sheet = doc.sheetsByIndex[0];
 
-    // Получение заголовков столбцов
     await sheet.loadHeaderRow();
     const headers = sheet.headerValues;
     const requiredHeaders = ['URL', 'Timestamp', 'Device', 'OS', 'Browser'];
@@ -22,7 +22,7 @@ async function appendToSheet(data) {
       return;
     }
 
-    console.log('Appending row:', data); // Логирование данных для отладки
+    console.log('Appending row:', data);
     await sheet.addRow({
       URL: data.url,
       Timestamp: data.timestamp,
@@ -32,7 +32,7 @@ async function appendToSheet(data) {
     });
     console.log('Row appended successfully');
   } catch (error) {
-    console.error('Error appending row:', error); // Логирование ошибок
+    console.error('Error appending row:', error);
     throw error;
   }
 }
