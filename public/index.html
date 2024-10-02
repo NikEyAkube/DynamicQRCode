@@ -85,5 +85,9 @@
     <div id="qrCodeContainer"></div>
   </div>
   <script src="script.js"></script>
+  <script type="module">
+    import analyticsScript from './analytics.js';
+    document.body.insertAdjacentHTML('beforeend', analyticsScript);
+  </script>
 </body>
 </html>
