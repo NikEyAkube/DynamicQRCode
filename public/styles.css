@@ -161,11 +161,19 @@ button:hover {
     font-size: 14px;
   }
 
-  .form-group input {
+  .form-group input[type="color"] {
     width: calc(100% - 20px);
     padding: 8px;
     font-size: 14px;
     margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-group input[type="color"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
   }
 
   button {
