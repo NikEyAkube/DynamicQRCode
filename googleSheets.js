@@ -32,7 +32,11 @@ async function appendToSheet(data) {
     });
     console.log('Row appended successfully');
   } catch (error) {
-    console.error('Error appending row:', error);
+    if (error.message.includes('Duplicate header detected')) {
+      console.error('Duplicate header detected in Google Sheets. Please ensure all headers are unique.');
+    } else {
+      console.error('Error appending row:', error);
+    }
     throw error;
   }
 }
