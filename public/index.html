@@ -89,17 +89,13 @@
     import analyticsScript from './analytics.js';
     document.body.insertAdjacentHTML('beforeend', analyticsScript);
   </script>
+  <!-- Add this script for Google Analytics integration -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBDC5SXEQD"></script>
   <script>
-    (function() {
-      const script = document.createElement('script');
-      script.src = '/_vercel/insights/script.js';
-      script.async = true;
-      document.head.appendChild(script);
-    })();
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR_TRACKING_ID');
   </script>
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
