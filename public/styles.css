@@ -156,13 +156,8 @@ button:hover {
     margin-bottom: 10px;
   }
 
-  .form-group label {
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-
-  .form-group input[type="color"] {
-    width: calc(100% - 20px);
+  .form-group input {
+    width: 100%;
     padding: 8px;
     font-size: 14px;
     margin: 0 auto;
@@ -171,7 +166,7 @@ button:hover {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .form-group input[type="color"]:focus {
+  .form-group input:focus {
     border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
   }
