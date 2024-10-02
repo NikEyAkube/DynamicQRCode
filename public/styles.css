@@ -156,6 +156,11 @@ button:hover {
     margin-bottom: 10px;
   }
 
+  .form-group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
   .form-group input {
     width: 100%;
     padding: 8px;
@@ -186,5 +191,43 @@ button:hover {
   #qrCodeContainer canvas {
     width: 100%;
     height: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    font-size: 16px;
+  }
+
+  .form-group input {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 15px;
+    font-size: 18px;
+  }
+
+  #qrCodeContainer {
+    margin-top: 20px;
   }
 }
