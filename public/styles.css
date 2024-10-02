@@ -1,13 +1,22 @@
-body {
-  font-family: 'Roboto', sans-serif;
+* {
+  box-sizing: border-box; /* Apply box-sizing globally */
+}
+
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  background: #f4f4f9;
+}
+
+body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* Change from height to min-height */
-  overflow-x: hidden; /* Allow vertical scrolling */
-  overflow-y: auto; /* Allow vertical scrolling */
   position: relative;
   background: #f4f4f9;
   box-sizing: border-box; /* Include padding and border in element's total width and height */
@@ -137,6 +146,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
@@ -166,7 +176,6 @@ button:hover {
   }
 
   .form-group input {
-    width: 100%;
     padding: 8px;
     font-size: 14px;
     margin: 0 auto;
