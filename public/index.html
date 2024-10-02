@@ -89,5 +89,13 @@
     import analyticsScript from './analytics.js';
     document.body.insertAdjacentHTML('beforeend', analyticsScript);
   </script>
+  <script>
+    (function() {
+      const script = document.createElement('script');
+      script.src = '/_vercel/insights/script.js';
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+  </script>
 </body>
 </html>
