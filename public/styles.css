@@ -7,8 +7,10 @@ body {
   align-items: center;
   min-height: 100vh; /* Change from height to min-height */
   overflow-x: hidden; /* Allow vertical scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
   position: relative;
   background: #f4f4f9;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 #bg-wrap {
@@ -29,6 +31,7 @@ body {
   text-align: center;
   max-width: 400px;
   width: 100%;
+  box-sizing: border-box; /* Ensure padding and border are included in width */
   animation: fadeIn 1s ease-in-out;
 }
 
@@ -86,6 +89,7 @@ select {
   border-radius: 4px;
   font-size: 1em;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Ensure padding and border are included in width */
 }
 
 input[type="text"]:focus,
@@ -169,6 +173,7 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
   }
 
   .form-group input:focus {
