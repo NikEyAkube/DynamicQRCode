@@ -5,8 +5,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh; /* Change from height to min-height */
+  overflow-x: hidden; /* Allow vertical scrolling */
   position: relative;
   background: #f4f4f9;
 }
