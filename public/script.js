@@ -75,4 +75,5 @@ function consoleText(words, id, colors) {
     }, 400);
 }
 
+console.log(document.getElementById('text')); // Check if the element is found
 consoleText(['Made by Yakubov Nikita.', 'Made with Love ❤️'], 'text', ['tomato', 'rebeccapurple', 'lightblue']);
