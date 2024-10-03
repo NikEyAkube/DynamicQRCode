@@ -246,3 +246,22 @@ button:hover {
     margin-top: 20px;
   }
 }
+
+.console-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+.console-underscore {
+  display: inline-block;
+  width: 10px;
+  background-color: currentColor;
+}
+
+.hidden {
+  visibility: hidden;
+}
