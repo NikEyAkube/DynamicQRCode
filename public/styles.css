@@ -1,35 +1,35 @@
 * {
-  box-sizing: border-box; /* Apply box-sizing globally */
+  box-sizing: border-box;
 }
 
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: scroll; /* Ensure vertical scrolling is always possible */
   font-family: 'Roboto', sans-serif;
   background: #f4f4f9;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
 body {
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Align items to the top to allow scrolling */
-  min-height: 100vh; /* Change from height to min-height */
-  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   background: #f4f4f9;
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 #bg-wrap {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -1;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .container {
@@ -38,11 +38,13 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  max-width: 400px;
-  width: 100%;
-  box-sizing: border-box; /* Ensure padding and border are included in width */
+  max-width: 600px;
+  width: 90%;
+  margin: 40px auto; /* Обновленный отступ */
+  position: relative;
+  z-index: 1;
+  height: auto;
   animation: fadeIn 1s ease-in-out;
-  margin: 20px 0; /* Add margin to allow space for scrolling */
 }
 
 @keyframes fadeIn {
@@ -99,7 +101,6 @@ select {
   border-radius: 4px;
   font-size: 1em;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-sizing: border-box; /* Ensure padding and border are included in width */
 }
 
 input[type="text"]:focus,
@@ -132,9 +133,19 @@ button:hover {
   transform: translateY(-2px);
 }
 
-#qrCodeContainer img {
+#qrCodeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 20px;
+  min-height: 200px;
+}
+
+#qrCodeContainer img,
+#qrCodeContainer canvas {
   max-width: 100%;
+  height: auto;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
@@ -142,90 +153,36 @@ button:hover {
   animation: fadeIn 1s ease-in-out;
 }
 
-#qrCodeContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 20px;
+.console-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  z-index: 2;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-  body {
-    padding: 10px;
-  }
-
-  .container {
-    width: 90%;
-    max-width: 350px;
-    margin: 0 auto;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    border-radius: 8px;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-
-  .form-group label {
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-
-  .form-group input {
-    padding: 8px;
-    font-size: 14px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box; /* Ensure padding and border are included in width */
-  }
-
-  .form-group input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
-  }
-
-  button {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-  }
-
-  #qrCodeContainer {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-  }
-
-  #qrCodeContainer canvas {
-    width: 100%;
-    height: auto;
-  }
+.console-underscore {
+  display: inline-block;
+  width: 10px;
+  background-color: currentColor;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
+/* Медиа-запросы для планшетов */
 @media (max-width: 1024px) {
-  body {
-    padding: 20px;
-  }
-
   .container {
     width: 80%;
     max-width: 400px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    border-radius: 12px;
-  }
-
-  .form-group {
-    margin-bottom: 15px;
   }
 
   .form-group label {
@@ -241,27 +198,49 @@ button:hover {
     padding: 15px;
     font-size: 18px;
   }
+}
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    width: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .container {
+    width: 95%;
+    max-width: none;
+    margin: 10px auto;
+    padding: 15px;
+  }
 
   #qrCodeContainer {
-    margin-top: 20px;
+    margin-top: 15px;
+  }
+
+  #qrCodeContainer canvas {
+    width: 100%;
+  }
+
+  .console-container {
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+    font-size: 0.8em;
   }
 }
 
-.console-container {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  font-size: 1em;
-  font-family: 'Roboto', sans-serif;
-  color: #fff;
-}
+@media (min-width: 1025px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Центрирование по вертикали */
+  }
 
-.console-underscore {
-  display: inline-block;
-  width: 10px;
-  background-color: currentColor;
-}
-
-.hidden {
-  visibility: hidden;
+  .container {
+    margin: 0; /* Убираем дополнительные отступы */
+  }
 }
