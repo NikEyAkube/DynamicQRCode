@@ -1,9 +1,9 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const moment = require('moment-timezone');
-require('dotenv').config();
 
 // Декодирование учетных данных из переменной окружения
 const creds = JSON.parse(Buffer.from(process.env.GOOGLE_CREDENTIALS, 'base64').toString('utf-8'));
+ // путь к вашим учетным данным
 
 async function appendToSheet(data) {
   try {
@@ -14,7 +14,7 @@ async function appendToSheet(data) {
 
     await sheet.loadHeaderRow();
     const headers = sheet.headerValues;
-    const requiredHeaders = ['URL', 'Timestamp', 'Device', 'OS', 'Browser'];
+    const requiredHeaders = ['URL', 'Timestamp', 'Device', 'OS', 'Browser', 'IP Address'];
     const missingHeaders = requiredHeaders.filter(header => !headers.includes(header));
 
     if (missingHeaders.length > 0) {
@@ -28,7 +28,8 @@ async function appendToSheet(data) {
       Timestamp: data.timestamp,
       Device: data.device,
       OS: data.os,
-      Browser: data.browser
+      Browser: data.browser,
+      'IP Address': data.ip // Добавляем IP Address
     });
     console.log('Row appended successfully');
   } catch (error) {
