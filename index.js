@@ -8,6 +8,10 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3001;
 const baseUrl = process.env.BASE_URL || `https://${process.env.VERCEL_URL}`; // Используем переменную окружения для базового URL
+ // Используем переменную окружения для базового URL
+
+// Если ваше приложение развернуто за прокси (например, на Vercel), включите доверие к прокси
+app.set('trust proxy', true);
 
 app.use(express.static(path.join(__dirname, 'public'))); // Обслуживание статических файлов из папки public
 app.use(useragent.express()); // Используем middleware для user-agent
@@ -36,12 +40,22 @@ app.get('/track', async (req, res) => {
     return res.status(400).send('URL is required');
   }
 
+  // Захват IP-адреса пользователя
+  const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || (req.connection.socket ? req.connection.socket.remoteAddress : null);
+
   const timestamp = moment().tz('Europe/Moscow').format('YYYY-MM-DD HH:mm:ss'); // Московское время
   const device = req.useragent.isMobile ? 'Mobile' : req.useragent.isTablet ? 'Tablet' : 'Desktop';
   const os = req.useragent.os;
   const browser = req.useragent.browser;
 
-  const data = { url, timestamp, device, os, browser };
+  const data = { 
+    url, 
+    timestamp, 
+    device, 
+    os, 
+    browser,
+    ip: ipAddress 
+  };
   console.log('Data to be logged:', data); // Логирование данных для отладки
 
   await appendToSheet(data);
